@@ -34,21 +34,37 @@ class IceCreamStand(Restaurant):
 
     def find_flavor(self, flavor):
         """Verifica se o sabor informado está disponível."""
+
+        # Melhoria, validar o tipo da váriavel 'flavor' (fixed)
+        if not isinstance(flavor, str):
+            return f"Parametro 'flavor' invalido!"
+
+        # Bug, deveria mostrar qual sabor não tem e não todos os sabores (fixed)
         if self.flavors:
             if flavor in self.flavors:
-                return f"Temos no momento {self.flavors}!"
+                # Bug, deveria mostrar qual sabor  tem e não todos os sabores (fixed)
+                return f"Temos no momento {flavor}!"
             else:
-                return f"Não temos no momento {self.flavors}!"
+                # Bug, deveria mostrar qual sabor não tem e não todos os sabores (fixed)
+                return f"Não temos no momento {flavor}!"
         else:
             return "Estamos sem estoque atualmente!"
 
-    def add_flavor(self, flavor):
+    def add_flavor(self, flavor: str):
         """Add o sabor informado ao estoque."""
+
+        # Melhoria, validar o tipo da váriavel 'flavor' (fixed)
+        if not isinstance(flavor, str):
+            return f"Parametro 'flavor' invalido!"
+
         if self.flavors:
             if flavor in self.flavors:
-                return "\nSabor já disponivel!"
+                # Melhoria, removendo o \n, não parece estar sendo utilizado
+                return "Sabor já disponivel!"
             else:
                 self.flavors.append(flavor)
                 return f"{flavor} adicionado ao estoque!"
         else:
-            return "Estamos sem estoque atualmente!"
+            # Bug - Quando não havia nenhum produto, não seria possível adicionar nada (FIXED)
+            self.flavors.append(flavor)
+            return f"{flavor} adicionado ao estoque!"

@@ -3,7 +3,7 @@ import pytest
 
 class TestRestaurant:
 
-    def test_describe_restaurant(self):
+    def test_describe_restaurant_success(self):
         # Setup
         restaurant =  Restaurant("Seu Alfredo", "Comida Italiana")
 
